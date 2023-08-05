@@ -14,6 +14,7 @@ import java.util.Optional;
 public class StoreLocationService {
 
     private final StoreLocationRepository storeLocationRepository;
+
     public StoreLocation saveStoreLocation(StoreLocation storeLocation) {
         storeLocationRepository.save(storeLocation);
         return storeLocation;

@@ -15,7 +15,7 @@ import lombok.ToString;
 public class StoreLocation {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
     private String name;

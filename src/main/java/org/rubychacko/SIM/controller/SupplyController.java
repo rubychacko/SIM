@@ -7,23 +7,29 @@ import org.rubychacko.SIM.model.Supply;
 import org.rubychacko.SIM.service.SupplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 @Slf4j
-@RestController
+@Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SupplyController {
 
     private final SupplyService supplyService;
 
     @PostMapping("/supply")
-    public ResponseEntity<?> createSupply(@RequestBody Supply supply) {
+    public String createSupply(Supply supply) {
         log.info("Received request to create supply record with supply={}", supply);
         val response = supplyService.saveSupply(supply);
-        return ResponseEntity.ok()
-                .body(response);
+
+        return "redirect:/supply";
+//        return ResponseEntity.ok()
+//                .body(response);
     }
 
     @GetMapping("/product/{storeId}/{productId}")
@@ -47,9 +53,13 @@ public class SupplyController {
     }
 
     @GetMapping("/supply")
-    public ResponseEntity<?> getStoreLocations() {
+    public String getStoreLocations(Model model) {
         log.info("Received request to retrieve all the supply records");
         val supplies = supplyService.findAllSupplies();
-        return ResponseEntity.ok().body(supplies);
+
+        model.addAttribute("supply", new Supply());
+        model.addAttribute("supplies", supplies);
+
+        return "supply";
     }
 }

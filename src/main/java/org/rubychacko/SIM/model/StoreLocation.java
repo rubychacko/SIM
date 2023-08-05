@@ -22,5 +22,7 @@ public class StoreLocation {
     @Column(nullable = false)
     private String hours;
     @Column(nullable = false)
-    private String phone;
+    private String city;
+    @Column(nullable = false)
+    private String contact;
 }

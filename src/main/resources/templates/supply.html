@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inventory Management</title>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -11,14 +11,21 @@
             integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="main.css"/>
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="main.css" /> -->
 </head>
 
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Inventory Management</a>
+        <div class="container">
+<!--            <a class="navbar-brand" href="#">Inventory Management</a>-->
+            <a class="navbar-brand" href="/store_inventory_management/home">
+                <img th:src="@{images/Logo.png}" width="70" height="50" alt="">
+            </a>
             <button
                     class="navbar-toggler"
                     type="button"
@@ -30,78 +37,35 @@
             >
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">More Info</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
-                    </li>
-                </ul>
-            </div>
+            <!-- Navigation links here -->
         </div>
     </nav>
 </header>
 
 <main>
     <div class="container">
-        <div class="heading">
-            <h1>
-                Store Inventory Management
-            </h1>
+        <div class="heading text-center mt-4">
+            <h1>Store Inventory Management</h1>
         </div>
-        <div class="tabs">
+        <div class="tabs mt-4">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button
+                    <a
                             class="nav-link"
-                            id="store-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#store-tab-pane"
-                            type="button"
-                            role="tab"
-                            aria-controls="store-tab-pane"
-                            aria-selected="false">
-                    </button>
-                    <a class="nav-link" href="/store_inventory_management/store_location">Store Locations</a>
+                            href="/store_inventory_management/store_location"
+                    >Store Locations</a
+                    >
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button
-                            class="nav-link"
-                            id="product-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#product-tab-pane"
-                            type="button"
-                            role="tab"
-                            aria-controls="product-tab-pane"
-                            aria-selected="true">
-                    </button>
                     <a class="nav-link" href="/store_inventory_management/product">Product</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button
-                            class="nav-link active"
-                            id="supply-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#supply-tab-pane"
-                            type="button"
-                            role="tab"
-                            aria-controls="supply-tab-pane"
-                            aria-selected="true">
-                    </button>
-                    <a class="nav-link" href="#">Inventory</a>
+                    <a class="nav-link" href="/store_inventory_management/supply"
+                    >Inventory</a
+                    >
                 </li>
             </ul>
-            <div class="tab-content" id="myTabContent">
+            <div class="tab-content mt-3" id="myTabContent">
                 <div
                         class="tab-pane fade show active"
                         id="supply-tab-pane"
@@ -109,8 +73,6 @@
                         aria-labelledby="supply-tab"
                         tabindex="0"
                 >
-                    <div class="heading">
-                    </div>
                     <div class="add-item">
                         <form class="form" action="#" th:action="@{/supply}" th:object="${supply}" method="POST">
                             <div class="mb-3">
@@ -157,35 +119,41 @@
                                     />
                                 </label>
                             </div>
-                            <div class="mb-3">
-                                <button
-                                        class="btn btn-success"
-                                        type="submit"
-                                >
-                                    Add
-                                </button>
-                                <button class="btn btn-danger" type="reset">Reset</button>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <button class="btn btn-success" type="submit">Save</button>
+                                    <button class="btn btn-danger" type="reset">Reset</button>
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <table class="table">
+                    <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th scope="col">StoreId</th>
                             <th scope="col">ProductId</th>
                             <th scope="col">Total_Inventory</th>
                             <th scope="col">Available_Inventory</th>
+                            <th scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody id="current_supply_list">
                         <tr th:if="${supplies.empty}">
-                            <td colspan="2"> No Products Available</td>
+                            <td colspan="6"> No Products Available</td>
                         </tr>
                         <tr th:each="supply : ${supplies}">
                             <td><span th:text="${supply.storeId}"> Store ID </span></td>
                             <td><span th:text="${supply.productId}"> Product ID </span></td>
                             <td><span th:text="${supply.totalInventory}"> Total Inventory </span></td>
                             <td><span th:text="${supply.availableInventory}"> Available Inventory </span></td>
+                            <td>
+                                <a th:href="${'/store_inventory_management/supply/update/' + {supply.storeId} + '/' + {supply.productId}}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+<!--                                <a th:if="${product.id}" th:href="@{/product/delete/{id}(id=${product.id})}" class="text-danger ms-2">-->
+<!--                                    <i class="fas fa-trash"></i>-->
+<!--                                </a>-->
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -194,12 +162,5 @@
         </div>
     </div>
 </main>
-
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-        crossorigin="anonymous"
-></script>
-<script src="main.js"></script>
 </body>
 </html>

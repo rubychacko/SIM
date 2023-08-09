@@ -26,13 +26,23 @@ public class SupplyController {
     public String createSupply(Supply supply) {
         log.info("Received request to create supply record with supply={}", supply);
         val response = supplyService.saveSupply(supply);
-
         return "redirect:/supply";
-//        return ResponseEntity.ok()
-//                .body(response);
     }
 
-    @GetMapping("/product/{storeId}/{productId}")
+    @GetMapping("/supply/update/{storeId}/{productId}")
+    public String internalUpdateSupply(@PathVariable("storeId") String storeId, @PathVariable("productId") String productId, Model model) {
+
+        log.info("Received request to load supply records with storeId={} and productId={}", storeId, productId);
+        val supplies = supplyService.findAllSupplies();
+        Supply supply = supplyService.findAllSuppliesByStoreIdAndProductId(storeId, productId).get(0);
+
+        model.addAttribute("supply", supply);
+        model.addAttribute("supplies", supplies);
+
+        return "supply";
+    }
+
+    @GetMapping("/supply/{storeId}/{productId}")
     public ResponseEntity<?> getSupplyByStoreAndProductIds(@PathVariable("storeId") String storeId, @PathVariable("productId") String productId) {
 
         log.info("Received request to retrieve supply records with storeId={} and productId={}", storeId, productId);
@@ -42,7 +52,7 @@ public class SupplyController {
                 .body(supplies) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/product/{storeId}")
+    @GetMapping("/supply/{storeId}")
     public ResponseEntity<?> getSupplyByStoreId(@PathVariable("storeId") String storeId) {
 
         log.info("Received request to retrieve all supply records with storeId={}", storeId);

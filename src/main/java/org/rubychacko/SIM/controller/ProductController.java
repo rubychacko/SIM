@@ -28,8 +28,6 @@ public class ProductController {
         log.info("Received request to create a product with product={}", product);
         productService.saveProductInfo(product);
         return "redirect:/product";
-//        return ResponseEntity.ok()
-//                .body(response);
     }
 
     @GetMapping("/product/{id}")
@@ -43,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public String getSProducts(Model model) {
+    public String getProducts(Model model) {
         log.info("Received request to retrieve all the product records");
         val products = productService.findAllProducts();
 
@@ -53,18 +51,31 @@ public class ProductController {
         return "product";
     }
 
-    @GetMapping("/product/all")
-    public ResponseEntity<?> getAllProducts() {
-        log.info("Received request to retrieve all the product records");
+    @GetMapping("/product/delete/{id}")
+    public String deleteProductExternal(@PathVariable("id") String productId) {
+        log.info("Received request to delete the record with id={}", productId);
+        productService.deleteProduct(productId);
+        return "redirect:/product";
+    }
+
+    @GetMapping("/product/update/{id}")
+    public String updateProductExternal(@PathVariable("id") String productId, Model model) {
+        log.info("Received request to update the record with id={}", productId);
+
         val products = productService.findAllProducts();
-        return ResponseEntity.ok().body(products);
+        Product product = productService.findProductById(productId).get();
+
+        model.addAttribute("product", product);
+        model.addAttribute("products", products);
+
+        return "product";
     }
 
     @DeleteMapping("/product/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable("id") String productId) {
+    public String deleteProduct(@PathVariable("id") String productId) {
 
         log.info("Received request to delete the product record with id={}", productId);
         productService.deleteProduct(productId);
-        return ResponseEntity.noContent().build();
+        return "redirect:/product";
     }
 }

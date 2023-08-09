@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+
 </head>
 <body>
+<body>
+<section class="container">
+  <div class="login-container">
+    <div class="circle circle-one"></div>
+    <div class="form-container">
+      <h1>LOGIN</h1>
+      <form method="post" action="#" th:action="@{/login}">
+        <input type="text" placeholder="USERNAME" id="username"  name="username" class="form-control" required="" autofocus="" />
+        <input type="password" placeholder="PASSWORD" id="password" name="password" class="form-control" required="" />
+        <button>SUBMIT</button>
+      </form>
+      <div>
+<!--        <a th:href="@{/sign-up}">REGISTER</a>-->
+        <p class="register">Not a member?  <a th:href="@{/sign-up}">Register here!</a></p>
+      </div>
+    </div>
+    <div class="circle circle-two"></div>
+  </div>
+</section>
+</body>
 
-<br><br>
-<nav id="menu">
-  <ul>
-    <li><a th:href="@{/login}">Login</a></li>
-    <li><a th:href="@{/sign-up}">Sign Up</a></li>
-  </ul>
-
-</nav>
-<div class="container">
-  <form class="form-signin" method="post" action="#" th:action="@{/login}">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <p>
-      <label for="username" class="sr-only">Username</label>
-      <input type="text" id="username"  name="username" class="form-control" placeholder="Username" required="" autofocus="">
-    </p>
-    <p>
-      <label for="password" class="sr-only">Password</label>
-      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
-    </p>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form>
-</div>
 </body>
 </html>

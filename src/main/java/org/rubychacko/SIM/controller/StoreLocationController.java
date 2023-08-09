@@ -20,7 +20,6 @@ public class StoreLocationController {
 
     private final StoreLocationService storeLocationService;
 
-
     @PostMapping("/store_location")
     public String createStoreLocation(StoreLocation storeLocation) {
         log.info("Received request to create a store location with storeLocation={}", storeLocation);
@@ -51,6 +50,7 @@ public class StoreLocationController {
     public String getStoreLocations(Model model) {
         log.info("Received request to return store location records page");
         val storeLocations = storeLocationService.findAllStores();
+
         model.addAttribute("storeLocation", new StoreLocation());
         model.addAttribute("stores", storeLocations);
         return "index";

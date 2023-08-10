@@ -1,17 +1,17 @@
 package org.rubychacko.SIM.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Setter
 @Getter
-@NoArgsConstructor
 @ToString
 @Table
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @IdClass(SupplyPrimaryKey.class)
 public class Supply {
     @Id

@@ -54,7 +54,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         (auth) -> auth
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/"), AntPathRequestMatcher.antMatcher("/login"),
-                                        AntPathRequestMatcher.antMatcher("/css/*"), AntPathRequestMatcher.antMatcher("/js/*"),
+                                        AntPathRequestMatcher.antMatcher("/css/*"), AntPathRequestMatcher.antMatcher("/js/*"), AntPathRequestMatcher.antMatcher("/images/*"),
                                         AntPathRequestMatcher.antMatcher("/sign-up"), AntPathRequestMatcher.antMatcher("/signup-process")).permitAll()
                                 //.requestMatchers("/home").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().authenticated()

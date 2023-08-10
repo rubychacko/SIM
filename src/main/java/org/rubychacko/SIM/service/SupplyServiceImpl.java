@@ -28,6 +28,10 @@ public class SupplyServiceImpl implements SupplyService {
     }
 
     public List<Supply> findAllSuppliesByStoreIdAndProductId(String storeId, String productId) {
-        return supplyRepository.findAllSupplyByStoreIdAndProductId(storeId, productId);
+        return supplyRepository.findSupplyByStoreAndProduct(storeId, productId);
+    }
+
+    public void deleteSupplyByStoreIdAndProductId(String storeId, String productId) {
+        supplyRepository.deleteSupplyByStoreAndProduct(storeId, productId);
     }
 }

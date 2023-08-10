@@ -25,7 +25,19 @@ public class SupplyController {
 
     @PostMapping(SUPPLY_CONTEXT_PATH)
     public String createSupply(Supply supply) {
-        log.info("Received request to create supply record with supply={}", supply);
+        try {
+            log.info("Received request to create supply record with supply={}", supply);
+
+            if (supplyServiceImpl.validateRequest(supply)) {
+                supplyServiceImpl.saveSupply(supply);
+                log.info("Successfully updated supply in the system");
+                return HTML_SUPPLY_REDIRECT;
+            }
+        } catch (Exception e) {
+            log.error("Invalid request received", e);
+            return HTML_SUPPLY_REDIRECT;
+        }
+
         val response = supplyServiceImpl.saveSupply(supply);
         return HTML_SUPPLY_REDIRECT;
     }

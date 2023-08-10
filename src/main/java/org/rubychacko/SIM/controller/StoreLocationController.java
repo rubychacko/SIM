@@ -57,9 +57,9 @@ public class StoreLocationController {
     }
 
     /**
-     * To retrieve the product resource from the system by its ID
+     * To retrieve the storeLocation resource from the system by its ID
      *
-     * @return - Product object if present in the system or 404
+     * @return - StoreLocation Records
      */
     @GetMapping(STORE_CONTEXT_PATH + "/list")
     public ResponseEntity<?> getAllStoreLocations() {
@@ -68,7 +68,12 @@ public class StoreLocationController {
         return ResponseEntity.ok().body(storeLocations);
     }
 
-
+    /**
+     * To retrieve the StoreLocation HTML view with the details to be presented to the user
+     *
+     * @param model model object for interacting with the UI
+     * @return - StoreLocation HTML view with details filled in for the user
+     */
     @GetMapping(STORE_CONTEXT_PATH)
     public String getStoreLocations(Model model) {
         log.info("Received request to return store location records page");
@@ -78,7 +83,12 @@ public class StoreLocationController {
         model.addAttribute("stores", storeLocations);
         return HTML_INDEX_VIEW;
     }
-
+    /**
+     * To delete a StoreLocation resource in the system by its ID
+     *
+     * @param storeId id of the store object to be deleted
+     * @return -  status indicating request received for delete.
+     */
     @DeleteMapping(STORE_CONTEXT_PATH + "/{id}")
     public ResponseEntity<?> deleteStoreLocation(@PathVariable("id") String storeId) {
 
@@ -88,7 +98,13 @@ public class StoreLocationController {
 
         return ResponseEntity.noContent().build();
     }
-
+    /**
+     * To update a StoreLocation resource in the system by its Id. Helper method to refresh the view with the edit form
+     *
+     * @param storeId id of the  object to be deleted
+     * @param model model object for interacting with the UI
+     * @return - StoreLocation update HTML view with updated details filled in for the user
+     */
     @GetMapping(STORE_CONTEXT_PATH + "/update/{id}")
     public String updateStoreLocation(@PathVariable("id") String storeId, Model model) {
 
@@ -101,7 +117,12 @@ public class StoreLocationController {
         return HTML_INDEX_VIEW;
     }
 
-
+    /**
+     * To delete a StoreLocation resource in the system by its ID
+     *
+     * @param storeId id of the StoreLocation object to be deleted
+     * @return - StoreLocation HTML view with updated details filled in for the user
+     */
     @GetMapping(STORE_CONTEXT_PATH + "/delete/{id}")
     public String internalDeleteStoreLocation(@PathVariable("id") String storeId) {
 

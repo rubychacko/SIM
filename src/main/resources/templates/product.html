@@ -23,7 +23,7 @@
         <div class="container">
 <!--            <a class="navbar-brand" href="#">Inventory Management</a>-->
             <a class="navbar-brand" href="/store_inventory_management/home">
-                <img th:src="@{images/Logo.png}" width="70" height="50" alt="">
+                <img th:src="@{images/Logo.png}" width="90" height="50" alt="">
             </a>
             <button
                     class="navbar-toggler"
@@ -38,8 +38,13 @@
             </button>
             <!-- Navigation links here -->
         </div>
-        <a class="nav-item mr-3 nav-link p-3" href="#" >Report An Issue?</a>
-        <a class="nav-item mr-3 nav-link p-3" href="/store_inventory_management/logout" >Logout</a>
+        <a class="navbar-brand" href="/store_inventory_management/report_issue">
+            <img th:src="@{images/report_issue.png}" width="50" height="40" alt="">
+        </a>
+        <!--        <a class="nav nav-pills mr-3 nav-link p-3" href="/store_inventory_management/logout" >Logout</a>-->
+        <a class="navbar-brand" href="/store_inventory_management/logout">
+            <img th:src="@{images/logout.jpeg}" width="50" height="50" alt="">
+        </a>
     </nav>
 </header>
 

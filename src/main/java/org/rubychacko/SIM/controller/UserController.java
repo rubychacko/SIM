@@ -11,11 +11,17 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
 import static org.rubychacko.SIM.util.SIMConstants.*;
 
 @Slf4j
 @Controller
 public class UserController {
+    /**
+     * Works with @RequestMapping and initializes a WebData Binder
+     * used for populating from objects
+     * also binds data from web request to Java Bean objects
+     */
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -61,5 +67,11 @@ public class UserController {
     public String getHome() {
         log.info("home page is displayed");
         return HTML_STORE_REDIRECT;
+    }
+
+    @RequestMapping("/report_issue")
+    public String getReportIssue() {
+        log.info("Report issue page is displayed");
+        return "issue";
     }
 }

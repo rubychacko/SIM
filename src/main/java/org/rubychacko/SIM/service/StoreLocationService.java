@@ -1,34 +1,17 @@
 package org.rubychacko.SIM.service;
 
-import lombok.RequiredArgsConstructor;
 import org.rubychacko.SIM.model.StoreLocation;
-import org.rubychacko.SIM.repository.StoreLocationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class StoreLocationService {
+public interface StoreLocationService {
 
-    private final StoreLocationRepository storeLocationRepository;
+    StoreLocation saveStoreLocation(StoreLocation storeLocation);
 
-    public StoreLocation saveStoreLocation(StoreLocation storeLocation) {
-        storeLocationRepository.save(storeLocation);
-        return storeLocation;
-    }
+    Optional<StoreLocation> findStoreLocationById(Integer storeId);
 
-    public Optional<StoreLocation> findStoreLocationById(Integer storeId) {
-        return storeLocationRepository.findById(storeId);
-    }
+    List<StoreLocation> findAllStores();
 
-    public List<StoreLocation> findAllStores() {
-        return storeLocationRepository.findAll();
-    }
-
-    public void deleteStoreLocation(Integer storeId) {
-        storeLocationRepository.deleteById(storeId);
-    }
+    void deleteStoreLocation(Integer storeId);
 }

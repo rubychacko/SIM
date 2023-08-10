@@ -1,6 +1,7 @@
 package org.rubychacko.SIM.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.rubychacko.SIM.model.Product;
 import org.rubychacko.SIM.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.Optional;
  *
  * @author Ruby Chacko
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductServiceImpl implements ProductService{
@@ -28,6 +30,7 @@ public class ProductServiceImpl implements ProductService{
      */
     public Product saveProductInfo(Product product) {
         productRepository.save(product);
+        log.info("Saved product in the system with productInfo={}", product);
         return product;
     }
 

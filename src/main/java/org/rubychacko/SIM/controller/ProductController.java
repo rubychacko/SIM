@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
+import static org.rubychacko.SIM.util.SIMConstants.*;
+
 /**
  * Contains controller methods to manage the product resources.
  *
@@ -27,18 +29,17 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductServiceImpl productServiceImpl;
-
     /**
      * To create/save a product resource in the system
      *
      * @param product product object from the request
      * @return - Product HTML view with details filled in for the user
      */
-    @PostMapping("/product")
+    @PostMapping(PRODUCT_CONTEXT_PATH)
     public String createProduct(Product product) {
         log.info("Received request to create a product with product={}", product);
         productServiceImpl.saveProductInfo(product);
-        return "redirect:/product";
+        return HTML_PRODUCT_REDIRECT;
     }
 
     /**
@@ -47,7 +48,7 @@ public class ProductController {
      * @param productId id of the product object
      * @return - Product object if present in the system or 404
      */
-    @GetMapping("/product/{id}")
+    @GetMapping(PRODUCT_CONTEXT_PATH + "/{id}")
     public ResponseEntity<?> getProductInfoById(@PathVariable("id") String productId) {
 
         log.info("Received request to retrieve product record with id={}", productId);
@@ -63,7 +64,7 @@ public class ProductController {
      * @param model model object for interacting with the UI
      * @return - Product HTML view with details filled in for the user
      */
-    @GetMapping("/product")
+    @GetMapping(PRODUCT_CONTEXT_PATH)
     public String getProducts(Model model) {
         log.info("Received request to retrieve all the product records");
         val products = productServiceImpl.findAllProducts();
@@ -71,7 +72,7 @@ public class ProductController {
         model.addAttribute("product", new Product());
         model.addAttribute("products", products);
 
-        return "product";
+        return HTML_PRODUCT_VIEW;
     }
 
     /**
@@ -80,11 +81,11 @@ public class ProductController {
      * @param productId id of the product object to be deleted
      * @return - Product HTML view with updated details filled in for the user
      */
-    @GetMapping("/product/delete/{id}")
+    @GetMapping(PRODUCT_CONTEXT_PATH + "/delete/{id}")
     public String deleteProductExternal(@PathVariable("id") String productId) {
         log.info("Received request to delete the record with id={}", productId);
         productServiceImpl.deleteProduct(productId);
-        return "redirect:/product";
+        return HTML_PRODUCT_REDIRECT;
     }
 
     /**
@@ -94,7 +95,7 @@ public class ProductController {
      * @param model model object for interacting with the UI
      * @return - Product update HTML view with updated details filled in for the user
      */
-    @GetMapping("/product/update/{id}")
+    @GetMapping(PRODUCT_CONTEXT_PATH + "/update/{id}")
     public String updateProductExternal(@PathVariable("id") String productId, Model model) {
         log.info("Received request to update the record with id={}", productId);
 
@@ -104,7 +105,7 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("products", products);
 
-        return "product";
+        return HTML_PRODUCT_VIEW;
     }
 
     /**
@@ -113,11 +114,11 @@ public class ProductController {
      * @param productId id of the product object to be deleted
      * @return -  status indicating whether the removal was successful.
      */
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping(PRODUCT_CONTEXT_PATH + "/{id}")
     public String deleteProduct(@PathVariable("id") String productId) {
 
         log.info("Received request to delete the product record with id={}", productId);
         productServiceImpl.deleteProduct(productId);
-        return "redirect:/product";
+        return HTML_PRODUCT_REDIRECT;
     }
 }

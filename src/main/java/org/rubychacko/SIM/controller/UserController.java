@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import static org.rubychacko.SIM.util.SIMConstants.*;
 
 @Slf4j
 @Controller
@@ -31,34 +32,34 @@ public class UserController {
 
     @GetMapping("/")
     private String redirectToLogin() {
-        return "redirect:/login";
+        return HTML_LOGIN_REDIRECT;
     }
 
-    @GetMapping("/sign-up")
+    @GetMapping(SIGNUP_PATH)
     public String signUp(Model model) {
         model.addAttribute("userDto", new UserDTO());
-        return "signup";
+        return HTML_SIGNUP_VIEW;
     }
 
-    @PostMapping("/signup-process")
+    @PostMapping(SIGNUP_PROCESS_PATH)
     public String signupProcess(@Valid @ModelAttribute("userDto") UserDTO userDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.warn("Wrong attempt");
-            return "signup";
+            return HTML_SIGNUP_VIEW;
         }
         userDetailsService.createUser(userDTO);
-        return "redirect:/login";
+        return HTML_LOGIN_REDIRECT;
     }
 
-    @GetMapping("/login")
+    @GetMapping(LOGIN_PATH)
     public String getLoginPage() {
         log.info("Login page displayed");
-        return "login";
+        return HTML_LOGIN_VIEW;
     }
 
-    @RequestMapping("/home")
+    @RequestMapping(HOME_PATH)
     public String getHome() {
         log.info("home page is displayed");
-        return "redirect:/store_location";
+        return HTML_STORE_REDIRECT;
     }
 }

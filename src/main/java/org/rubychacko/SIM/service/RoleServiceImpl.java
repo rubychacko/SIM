@@ -7,35 +7,45 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+/**
+ * Contains service methods to manage the role services.
+ *
+ * @author Ruby Chacko
+ */
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
-   private RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
-   @Autowired
-   public RoleServiceImpl(RoleRepository roleRepository) {
-       this.roleRepository = roleRepository;
-   }
+    @Autowired
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
-   @Override
-   @Transactional
-   public void saveRole(Role role) {
-       roleRepository.save(role);
-   }
+    // To save the role information
+    @Override
+    @Transactional
+    public void saveRole(Role role) {
+        roleRepository.save(role);
+    }
 
-   @Override
-   @Transactional
-   public Role findRoleByRoleName(String name) {
-       return roleRepository.findRoleByName(name);
-   }
+    //To find the role by RoleName
+    @Override
+    @Transactional
+    public Role findRoleByRoleName(String name) {
+        return roleRepository.findRoleByName(name);
+    }
 
-   @Override
-   public List<Role> getAllRoles() {
-       return (List<Role>) roleRepository.findAll();
-   }
+    // To get a list of all Roles
+    @Override
+    public List<Role> getAllRoles() {
+        return (List<Role>) roleRepository.findAll();
+    }
 
-   @Override
-   public List<Role> getRolesByUser(long id) {
-       return roleRepository.findRoleByUser(id);
-   }
+    // To get list of all roles by UserId
+    @Override
+    public List<Role> getRolesByUser(long id) {
+        return roleRepository.findRoleByUser(id);
+    }
 }

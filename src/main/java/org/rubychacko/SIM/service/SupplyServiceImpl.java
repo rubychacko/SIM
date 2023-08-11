@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Contains service methods to manage the Supply Service resources.
+ *
+ * @author Ruby Chacko
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -22,27 +27,54 @@ public class SupplyServiceImpl implements SupplyService {
     private final StoreLocationService storeLocationService;
     private final ProductService productService;
 
+    /**
+     * To create/save a supply resource in the system
+     *
+     * @param supply supply object from the request
+     * @return - supply resource saved in the system
+     */
     public Supply saveSupply(Supply supply) {
         supplyRepository.save(supply);
         return supply;
     }
 
+    /**
+     * To retrieve all supply resources from the system
+     *
+     * @return - List of all the supply resources from the system
+     */
     public List<Supply> findAllSupplies() {
         return supplyRepository.findAll();
     }
 
+    /**
+     * To retrieve all supply resources from the system by storeId
+     *
+     * @return - List of all the supply resources from the system by StoreId
+     */
     public List<Supply> findAllSuppliesByStoreId(String storeId) {
         return supplyRepository.findAllSupplyByStoreId(storeId);
     }
 
+    /**
+     * To retrieve all supply resources from the system by storeId and productId
+     *
+     * @return - List of all the supply resources from the system by StoreId and productId
+     */
     public List<Supply> findAllSuppliesByStoreIdAndProductId(String storeId, String productId) {
         return supplyRepository.findSupplyByStoreAndProduct(storeId, productId);
     }
 
+    /**
+     * To delete supply resources from the system by storeId and productId
+     */
     public void deleteSupplyByStoreIdAndProductId(String storeId, String productId) {
         supplyRepository.deleteSupplyByStoreAndProduct(storeId, productId);
     }
 
+    /**
+     * To handle exception handling
+     */
     public boolean validateRequest(Supply supply) throws Exception {
 
         if (supply.getStoreId() == null || storeLocationService.findStoreLocationById(Integer.valueOf(supply.getStoreId())).isEmpty()) {

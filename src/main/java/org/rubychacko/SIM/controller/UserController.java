@@ -36,17 +36,20 @@ public class UserController {
         this.userDetailsService = userDetailsService;
     }
 
+    // Redirect to login page
     @GetMapping("/")
     private String redirectToLogin() {
         return HTML_LOGIN_REDIRECT;
     }
 
+    //HTML view of signup page
     @GetMapping(SIGNUP_PATH)
     public String signUp(Model model) {
         model.addAttribute("userDto", new UserDTO());
         return HTML_SIGNUP_VIEW;
     }
 
+    //warning given for wrong credentials
     @PostMapping(SIGNUP_PROCESS_PATH)
     public String signupProcess(@Valid @ModelAttribute("userDto") UserDTO userDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -57,18 +60,21 @@ public class UserController {
         return HTML_LOGIN_REDIRECT;
     }
 
+    // HTML page view of the login page
     @GetMapping(LOGIN_PATH)
     public String getLoginPage() {
         log.info("Login page displayed");
         return HTML_LOGIN_VIEW;
     }
 
+    // Redirected to the home page storeLocation page
     @RequestMapping(HOME_PATH)
     public String getHome() {
         log.info("home page is displayed");
         return HTML_STORE_REDIRECT;
     }
 
+    // Display report issue page
     @RequestMapping("/report_issue")
     public String getReportIssue() {
         log.info("Report issue page is displayed");

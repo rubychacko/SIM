@@ -83,6 +83,7 @@ public class SupplyController {
         return supplies.isEmpty() ? ResponseEntity.ok()
                 .body(supplies) : ResponseEntity.notFound().build();
     }
+
     /**
      * To retrieve the supply resource from the system by its ID
      *
@@ -98,12 +99,14 @@ public class SupplyController {
         return supplies.isEmpty() ? ResponseEntity.ok()
                 .body(supplies) : ResponseEntity.notFound().build();
     }
+
     /**
      * To retrieve the supply HTML view with the details to be presented to the user
      *
      * @param model model object for interacting with the UI
      * @return - Supply HTML view with details filled in for the user
      */
+
     @GetMapping(SUPPLY_CONTEXT_PATH)
     public String getStoreLocations(Model model) {
         log.info("Received request to retrieve all the supply records");

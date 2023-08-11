@@ -1,6 +1,5 @@
 package org.rubychacko.SIM.security;
 
-
 import org.rubychacko.SIM.model.Role;
 import org.rubychacko.SIM.model.User;
 import org.springframework.security.core.GrantedAuthority;

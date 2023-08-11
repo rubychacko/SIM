@@ -23,9 +23,6 @@ public class SupplyServiceImpl implements SupplyService {
     private final ProductService productService;
 
     public Supply saveSupply(Supply supply) {
-
-
-
         supplyRepository.save(supply);
         return supply;
     }

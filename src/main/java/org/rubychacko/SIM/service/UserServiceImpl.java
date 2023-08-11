@@ -59,7 +59,8 @@ public class UserServiceImpl implements UserService {
    }
 
 
-   /** Using model mapper helps to avoid extra coding
+   /** Using model mapper helps to avoid extra coding. A Java library that helps in mapping
+    * objects from one model to another, reducing the need for manual mapping code.
     * @param userDTO
     */
    @Transactional
